@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+solutions = File.open("solutions.txt") { |f|
+  f.read.split("\n").map { |s| s.split.last }
+}
+
+if ARGF.argv.count == 1
+  problem = ARGF.argv.first
+
+  start = Time.now
+  solution = `ruby solutions/problem#{problem}.rb`.strip
+  finish = Time.now
+
+  puts "Took #{finish - start} seconds"
+else
+  problem, solution = ARGF.argv
+end
+
+if solution == solutions[problem.to_i - 1]
+  puts "Correct, the answer is #{solution}"
+else
+  puts "Incorrect, the answer is not #{solution}"
+end
