@@ -7,8 +7,17 @@ solutions = File.open("solutions.txt") { |f|
 if ARGF.argv.count == 1
   problem = ARGF.argv.first
 
+  if File.exists?("solutions/problem#{problem}.rb")
+    command = "ruby solutions/problem#{problem}.rb"
+  elsif File.exists?("solutions/problem#{problem}.py")
+    command = "python solutions/problem#{problem}.py"
+  else
+    puts "No solution implementation found"
+    exit
+  end
+
   start = Time.now
-  solution = `ruby solutions/problem#{problem}.rb`.strip
+  solution = `#{command}`.strip
   finish = Time.now
 
   puts "Took #{finish - start} seconds"
