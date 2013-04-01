@@ -7,10 +7,14 @@ solutions = File.open("solutions.txt") { |f|
 if ARGF.argv.count == 1
   problem = ARGF.argv.first
 
-  if File.exists?("solutions/problem#{problem}.rb")
-    command = "ruby solutions/problem#{problem}.rb"
-  elsif File.exists?("solutions/problem#{problem}.py")
-    command = "python solutions/problem#{problem}.py"
+  file_name = "solutions/problem#{problem}"
+  if File.exists?("#{file_name}.rb")
+    command = "ruby #{file_name}.rb"
+  elsif File.exists?("#{file_name}.py")
+    command = "python #{file_name}.py]"
+  elsif File.exists?("#{file_name}.cpp")
+    `g++ #{file_name}.cpp -o solutions/bin/#{problem}`
+    command = "solutions/bin/#{problem}"
   else
     puts "No solution implementation found"
     exit
