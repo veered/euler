@@ -13,7 +13,7 @@ if ARGF.argv.count == 1
   elsif File.exists?("#{file_name}.py")
     command = "python #{file_name}.py]"
   elsif File.exists?("#{file_name}.cpp")
-    `g++ #{file_name}.cpp -o solutions/bin/#{problem}`
+    `clang++ -g -Wall -std=c++11 -stdlib=libc++ #{file_name}.cpp -o solutions/bin/#{problem}`
     command = "solutions/bin/#{problem}"
   else
     puts "No solution implementation found"
